@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Container, Table, Card } from "react-bootstrap";
 import { useAuth } from "../../hooks/useAuth/userAuth";
 import axios from "axios";
-
-const baseUrl='http://127.0.0.1:5000'
+import { baseUrl } from "../../urls/urls";
+// const baseUrl='http://127.0.0.1:5000'
 
 const MyOrders = () => {
     const {accessToken}=useAuth();

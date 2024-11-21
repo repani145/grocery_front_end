@@ -5,8 +5,8 @@ import LandNavbar from '../landNav/landNav';
 import axios from 'axios';
 import { useAuth } from '../../hooks/useAuth/userAuth';
 import './vendor_sign.css'
-
-const baseUrl = 'http://127.0.0.1:5000';
+import { baseUrl } from '../../urls/urls';
+// const baseUrl = 'http://127.0.0.1:5000';
 
 const VendorSignup = () => {
   const { accessToken } = useAuth();

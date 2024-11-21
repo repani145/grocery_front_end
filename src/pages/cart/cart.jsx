@@ -9,8 +9,8 @@ import { useUserData } from '../../contexts/multipleData/dataContext';
 import { useCartData } from '../../hooks/my_cart/my_cart';
 import { Link, useNavigate } from 'react-router-dom';
 // import { FunAdd, FunDel } from '../../hooks/useAddDel/useAddDel';
-
-const baseUrl = 'http://127.0.0.1:5000';
+import { baseUrl } from '../../urls/urls';
+// const baseUrl = 'http://127.0.0.1:5000';
 
 const Cart = () => {
     const { accessToken } = useAuth();

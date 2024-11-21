@@ -5,8 +5,8 @@ import { Nav, Form, FormControl, Button, Dropdown } from 'react-bootstrap';
 import { useAuth } from '../../hooks/useAuth/userAuth';
 import { Link, useNavigate } from 'react-router-dom';
 import { searchItemsContext } from '../../contexts/searchProductsContext/searchPros';
-
-const baseUrl = 'http://127.0.0.1:5000';
+import { baseUrl } from '../../urls/urls';
+// const baseUrl = 'http://127.0.0.1:5000';
 
 const NavSearch = () => {
     const {accessToken} = useAuth()

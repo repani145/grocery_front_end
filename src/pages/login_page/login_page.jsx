@@ -8,8 +8,9 @@ import axios from 'axios';
 import {useAuth} from '../../hooks/useAuth/userAuth';
 import { useNavigate } from 'react-router-dom';
 import Footor from '../../components/LandFooter/landFooter';
+import { baseUrl } from '../../urls/urls';
 // import useAuth from './hooks/useAuth'; // Adjust the path as necessary
-const baseUrl = 'http://127.0.0.1:5000'
+// const baseUrl = 'http://127.0.0.1:5000'
 
 function Login() {
     const { login  } = useAuth(); // Use the custom hook

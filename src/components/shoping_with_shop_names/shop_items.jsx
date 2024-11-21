@@ -4,8 +4,8 @@ import Card from "../itemcard/card";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth/userAuth";
-
-const baseUrl='http://127.0.0.1:5000'
+import { baseUrl } from "../../urls/urls";
+// const baseUrl='http://127.0.0.1:5000'
 
 const ShopItems = () => {
     const {accessToken}=useAuth();

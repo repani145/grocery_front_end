@@ -1,8 +1,8 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import { useAuth } from "../useAuth/userAuth";
 import axios from "axios";
-
-const baseUrl = 'http://127.0.0.1:5000';
+import { baseUrl } from "../../urls/urls";
+// const baseUrl = 'http://127.0.0.1:5000';
 
 const CategoriesContext = createContext();
 

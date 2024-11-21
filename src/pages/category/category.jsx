@@ -8,9 +8,9 @@ import Card from "../../components/itemcard/card";
 import './category.css'
 import Notification from "../../components/notification_component/notification";
 import { useCartData } from "../../hooks/my_cart/my_cart";
+import { baseUrl } from "../../urls/urls";
 
-
-const baseUrl = "http://127.0.0.1:5000"
+// const baseUrl = "http://127.0.0.1:5000"
 // { item ,RemoveItem ,editData}
 
 const Category = () => {

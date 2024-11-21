@@ -7,7 +7,8 @@ import { Modal, Button, Form } from 'react-bootstrap';
 import Card from "../../components/itemcard/card";
 import './stocks.css'
 import { useAllCatgris2 } from "../../hooks/item_categories/itemcatgris2";
-const baseUrl = "http://127.0.0.1:5000";
+import { baseUrl } from "../../urls/urls";
+// const baseUrl = "http://127.0.0.1:5000";
 
 const Stock = () => {
     const { allCatgries } = useAllCatgris2();

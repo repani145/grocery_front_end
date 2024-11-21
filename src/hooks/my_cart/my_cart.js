@@ -4,10 +4,11 @@ import axios from "axios";
 import Cart from "../../pages/cart/cart";
 import Home from "../../pages/user_home_page/home_page";
 import Category from "../../pages/category/category";
+import { baseUrl } from "../../urls/urls";
 
 const CartDataContext = createContext()
 
-const baseUrl = 'http://127.0.0.1:5000';
+// const baseUrl = 'http://127.0.0.1:5000';
 
 // import { createContext, useContext, useEffect, useState } from "react";
 // import { useAuth } from "../useAuth/userAuth";

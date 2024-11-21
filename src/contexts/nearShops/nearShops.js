@@ -1,11 +1,11 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { useAuth } from "../useAuth/userAuth"
 import axios from "axios";
-
+import { baseUrl } from "../../urls/urls";
 
 const CartDataContext = createContext()
 
-const baseUrl = 'http://127.0.0.1:5000';
+// const baseUrl = 'http://127.0.0.1:5000';
 
 
 export const MycartDataProvider = ({ children }) => {

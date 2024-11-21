@@ -3,8 +3,8 @@ import { useAuth } from "../../hooks/useAuth/userAuth";
 import axios from "axios";
 import { Container, Row, Col, Card, Button, Modal, Form } from "react-bootstrap";
 import { FaTrash } from "react-icons/fa";
-
-const baseUrl = 'http://127.0.0.1:5000/';
+import { baseUrl } from "../../urls/urls";
+// const baseUrl = 'http://127.0.0.1:5000/';
 
 const AllCatgryList = () => {
     const { accessToken } = useAuth();

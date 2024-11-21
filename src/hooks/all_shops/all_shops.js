@@ -1,8 +1,8 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import axios from "axios";
 import { useAuth } from "../useAuth/userAuth";
-
-const baseUrl = 'http://127.0.0.1:5000';
+import { baseUrl } from "../../urls/urls";
+// const baseUrl = 'http://127.0.0.1:5000';
 
 const AllShopsContext = createContext();
 
