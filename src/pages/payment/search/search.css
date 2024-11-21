@@ -1,0 +1,34 @@
+.search-container {
+    position: relative;
+    width: 100%;
+    max-width: 600px; /* Width similar to the first image */
+    margin: 0 auto;
+    padding: 0; /* No padding for the container */
+}
+
+.search-input {
+    width: 100%;
+    padding: 10px 40px 10px 20px; /* Padding to make space for the search icon */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1); /* Slight shadow for input */
+}
+
+.search-icon {
+    position: absolute;
+    right: 10px; /* Position icon inside the input on the right */
+    top: 50%;
+    transform: translateY(-50%);
+    width: 18px; /* Adjust the size of the image */
+    height: 18px; /* Keep the size square */
+    cursor: pointer; /* Make it clickable */
+}
+
+/* Responsive styling */
+@media (max-width: 768px) {
+    .search-container {
+        max-width: 100%;
+        padding: 0 10px;
+    }
+}

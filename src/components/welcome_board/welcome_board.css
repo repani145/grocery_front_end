@@ -1,0 +1,80 @@
+/* Main container with wall effect */
+.welcome-board-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* margin: 40px auto; */
+  position: relative;
+  /* width: 80%; */
+  /* max-width: 600px; */
+  padding: 40px;
+  background: repeating-linear-gradient(
+    45deg,
+    #e0cfd1,
+    #e0cfd1 10px,
+    #d3b4b5 10px,
+    #d3b4b5 20px
+  );
+}
+
+/* Screw at the top center */
+.screw {
+  width: 10px;
+  height: 10px;
+  background-color: #724e27;
+  border-radius: 50%;
+  position: relative;
+  top: -5px;
+  z-index: 1;
+  margin-top: 20px;
+}
+
+/* Chain effect below the screw */
+.chain {
+  width: 2px;
+  height: 30px;
+  background: repeating-linear-gradient(
+    #724e27 0px,
+    #724e27 2px,
+    transparent 2px,
+    transparent 4px
+  );
+  position: relative;
+  top: -10px;
+  z-index: 1;
+}
+
+/* Welcome board styling */
+.welcome-board {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 70%;
+  padding: 20px;
+  margin-top: -7px;
+  background-color: #f6a859;
+  color: #724e27;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+  animation: swing 2s ease-in-out infinite;
+}
+
+.welcome-board h2 {
+  font-size: 2rem;
+  margin: 0;
+  color: #8aa7d6;
+}
+
+.welcome-board p {
+  font-size: 1.2rem;
+  color: #e0cfd1;
+}
+
+/* Swinging effect for the board */
+@keyframes swing {
+  0% { transform: rotate(1deg); }
+  50% { transform: rotate(-1deg); }
+  100% { transform: rotate(1deg); }
+}

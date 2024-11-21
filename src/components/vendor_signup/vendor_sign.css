@@ -1,0 +1,41 @@
+.signup-form-container {
+    background-color: #f8f9fa; /* Light background for form container */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .signup-form-container h2 {
+    color: #724e27; /* Darker brown color for form title */
+    font-weight: bold;
+  }
+  
+  .signup-form-container .form-label {
+    color: #8aa7d6; /* Light blue color for labels */
+  }
+  
+  .signup-form-container .form-control {
+    border-color: #f6a859; /* Light orange border for inputs */
+  }
+  
+  .signup-form-container .form-control:focus {
+    border-color: #724e27; /* Brown color for focused input border */
+    box-shadow: none; /* Remove default Bootstrap shadow on focus */
+  }
+  
+  .signup-form-container .btn-primary {
+    background-color: #f6a859; /* Light orange background for the button */
+    border-color: #f6a859;
+    color: white;
+  }
+  
+  .signup-form-container .btn-primary:hover {
+    background-color: #d59745; /* Darker orange on hover */
+    border-color: #d59745;
+  }
+  
+  .signup-form-container .alert-danger,
+  .signup-form-container .alert-success {
+    border-radius: 5px;
+  }
+  

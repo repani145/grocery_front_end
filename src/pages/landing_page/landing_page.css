@@ -1,0 +1,30 @@
+/* Full-page gradient background */
+.landBackGround {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(
+      135deg,
+      #ff6b57 0%,
+      #f6a859 40%,
+      #8aa7d6 70%,
+      #e0cfd1 100%
+    );
+    color: #1b1c1d;
+    font-family: Arial, sans-serif;
+  }
+
+  /* LiveText.css */
+.live-text {
+    font-size: 72px; /* Adjust size as needed */
+    font-weight: bold;
+    background-image: url('https://img.freepik.com/premium-photo/4k-nature-landscape-wallpaper_972395-394.jpg?semt=ais_hybrid'); /* Replace with your texture path */
+    background-size: cover;
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+  }
+  

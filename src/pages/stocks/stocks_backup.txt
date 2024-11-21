@@ -1,0 +1,316 @@
+import AdminLayout from "../../components/sidebar/side_bar";
+import VendorNavbar from "../../components/vendor_nav/vendor_nav";
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { useAuth } from "../../hooks/useAuth/userAuth";
+import { Modal, Button, Form } from 'react-bootstrap';
+import Card from "../../components/itemcard/card";
+import './stocks.css'
+const baseUrl = "http://127.0.0.1:5000"
+
+const Stock = () => {
+    const [itemTypes, setItemTypes] = useState([]);
+    const [items, setItems] = useState([]);
+    const [selectedType, setSelectedType] = useState(null);
+    const { accessToken } = useAuth();
+    const [showAddItemModal, setShowAddItemModal] = useState(false);
+    const [onUpdate,setOnUpdate] = useState(false)
+    const [formData, setFormData] = useState({
+        item_name: '',
+        price: '',
+        stock: '',
+        quantity: '',
+        category: ''
+    });
+// obj={
+//     // "_id": "671ff2973d4c3ae873fe2742",
+//     "category": "oils",
+//     "item_name": "geetha palm oil",
+//     "price": 100,
+//     "quantity": 850,
+//     // "shop_id": "671b7959df52f0a8ab0ab397",
+//     "stock": 40
+//   }
+    const editData = (obj)=>{
+        setOnUpdate(obj['_id'])
+        console.log("obj = ",obj)
+        const {_id,shop_id,...new_obj} = obj
+        setFormData(new_obj)
+        // console.log("formData ===>  ",formData)
+        setShowAddItemModal(true)
+    }
+
+    // Fetch item types on component mount
+    useEffect(() => {
+        const fetchItemTypes = async () => {
+            try {
+                const response = await axios.get(`${baseUrl}//all_item_types`, {
+                    headers: {
+                        Authorization: `Bearer ${accessToken}`
+                    }
+                }); // Adjust the URL as needed
+                console.log(response.data.data)
+                setItemTypes(response.data.data);
+            } catch (error) {
+                console.error('Error fetching item types:', error);
+            }
+        };
+
+        fetchItemTypes();
+        fetchItemsByType('dairy')
+    }, []);
+
+    // Fetch items based on the selected type
+    const fetchItemsByType = async (type) => {
+        try {
+            const response = await axios.get(`${baseUrl}/single_type/${type}`, {
+                headers: {
+                    Authorization: `Bearer ${accessToken}`
+                }
+            }
+            );
+            setItems(response.data.data);
+        } catch (error) {
+            console.error('Error fetching items:', error);
+        }
+    };
+
+    // Handle type button click
+    const handleTypeClick = (type) => {
+        setSelectedType(type);
+        fetchItemsByType(type);
+    };
+
+    // Handle form input change
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setFormData((prevData) => ({
+            ...prevData,
+            [name]: value
+        }));
+    };
+
+    // Handle form submission
+    const handleFormSubmit =  (e) => {
+        e.preventDefault();
+        const addItem = async()=>{
+            try {
+                const response = await axios.post(`${baseUrl}/add_item`, formData, {
+                    headers: {
+                        Authorization: `Bearer ${accessToken}`
+                    }
+                });
+                if (response.data.success) {
+                    setItems((preData)=>[...preData,response.data.data])
+                    // alert('Item added successfully!');
+                    setShowAddItemModal(false); // Close modal on success
+                }
+            } catch (error) {
+                console.error('Error adding item', error);
+            }
+        }
+
+        const updateItem = async()=>{
+            try {
+                const response =await axios.patch(`${baseUrl}/single_item/${onUpdate}`,formData,{
+                    headers:{
+                        Authorization:`Bearer ${accessToken}`
+                    }
+                }) // Adjust the URL as needed
+                console.log(items)
+                console.log(response.data.data)
+                if (response.data.success) {
+                    // Update the specific item in items
+                    setItems((prevItems) => 
+                        prevItems.map((item) => 
+                            item['_id'] === response.data.data['_id'] ? response.data.data : item
+                        )
+                    );
+                    setOnUpdate(false); // Reset the update state
+                    setShowAddItemModal(false); // Close the modal
+                }
+            } catch (error) {
+                console.error('Error fetching item types:', error);
+            }
+        }
+
+        onUpdate ? updateItem() :addItem()
+        
+    };
+
+    const RemoveItem = (item_id)=>{
+        const deleteItem = async()=>{
+            try {
+                const response =await axios.delete(`${baseUrl}/single_item/${item_id}`,{
+                    headers:{
+                        Authorization:`Bearer ${accessToken}`
+                    }
+                }) // Adjust the URL as needed
+                // alert('item removed successfully')
+                console.log("items.length = ",items.length)
+                setItems((prevItems) => prevItems.filter(item => item['_id'] !== item_id));
+                console.log("items.length ==",items.length)
+                console.log(items)
+            } catch (error) {
+                console.error('Error fetching item types:', error);
+            }
+        }
+        deleteItem()
+    }
+
+    return (
+
+        <>
+            <VendorNavbar />
+            <AdminLayout >
+                <div style={{}}>
+                    <div>
+                        {/* Button aligned to the right */}
+                        <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '20px', float: "right" }}>
+                            <Button variant="primary" onClick={() => setShowAddItemModal(true)}>
+                                Add Item
+                            </Button>
+                        </div>
+
+                        {/* Add Item Modal */}
+                        <Modal show={showAddItemModal} onHide={() => 
+                            {setOnUpdate(false)
+                            setShowAddItemModal(false)}}>
+                            <Modal.Header closeButton>
+                                <Modal.Title>{onUpdate ? "Update the item" :"Add New Item"}</Modal.Title>
+                            </Modal.Header>
+                            <Modal.Body>
+                                <Form onSubmit={handleFormSubmit}>
+                                    <Form.Group controlId="itemName">
+                                        <Form.Label>Item Name</Form.Label>
+                                        <Form.Control
+                                            type="text"
+                                            name="item_name"
+                                            value={formData.item_name}
+                                            onChange={handleInputChange}
+                                            placeholder="Enter item name"
+                                            required
+                                        />
+                                    </Form.Group>
+
+                                    <Form.Group controlId="price">
+                                        <Form.Label>Price</Form.Label>
+                                        <Form.Control
+                                            type="number"
+                                            name="price"
+                                            value={formData.price}
+                                            onChange={handleInputChange}
+                                            placeholder="Enter price"
+                                            required
+                                        />
+                                    </Form.Group>
+
+                                    <Form.Group controlId="stock">
+                                        <Form.Label>Stock</Form.Label>
+                                        <Form.Control
+                                            type="number"
+                                            name="stock"
+                                            value={formData.stock}
+                                            onChange={handleInputChange}
+                                            placeholder="Enter stock"
+                                            required
+                                        />
+                                    </Form.Group>
+
+                                    <Form.Group controlId="quantity">
+                                        <Form.Label>Quantity</Form.Label>
+                                        <Form.Control
+                                            type="number"
+                                            name="quantity"
+                                            value={formData.quantity}
+                                            onChange={handleInputChange}
+                                            placeholder="Enter quantity"
+                                            required
+                                        />
+                                    </Form.Group>
+
+                                    <Form.Group controlId="category">
+                                        <Form.Label>Category</Form.Label>
+                                        <Form.Control
+                                            as="select"
+                                            name="category"
+                                            value={formData.category}
+                                            onChange={handleInputChange}
+                                            required
+                                        >
+                                            <option value="">Select category</option>
+                                            {itemTypes.map((type, index) => (
+                                                <option key={index} value={type}>
+                                                    {type}
+                                                </option>
+                                            ))}
+                                        </Form.Control>
+                                    </Form.Group>
+
+                                    <Button variant="primary" type="submit" className="mt-3">
+                                        {onUpdate ? "Update the Data" : "Add Item"}
+                                    </Button>
+                                </Form>
+                            </Modal.Body>
+                        </Modal>
+                    </div>
+                    <div className="scrollable-container" >
+                        <h2>Stock Management</h2>
+                        <div className="items-button-container">
+                            {/* Display item type buttons */}
+                            {itemTypes.map((type) => (
+                                <button className="items-button"
+                                    key={type}
+                                    onClick={() => handleTypeClick(type)}
+                                    style={{
+                                        margin: '5px',
+                                        padding: '5px',
+                                        backgroundColor: selectedType === type ? 'blue' : 'gray',
+                                        color: 'white',
+                                    }}
+                                >
+                                    {type}
+                                </button>
+                            ))}
+                        </div>
+                        <div style={{ overflowY: "scroll", height: "60vh", marginTop: '20px' }}>
+                            <h3>Items</h3>
+                            {items.length > 0 ? (
+                                <div className="card-list">
+                                    {items.map((item) => (
+                                        <React.Fragment key={item.id}>
+                                                <Card item = {item} RemoveItem={RemoveItem} editData={editData} frroom={'stock'}/>
+                                        </React.Fragment>
+                                        // <li key={item.id}>{item.item_name}</li>
+                                    ))}
+                                </div>
+                            ) : (
+                                <p>No items found for this type.</p>
+                            )}
+                        </div>
+                    </div>
+                </div>
+            </AdminLayout>
+        </>
+
+    );
+};
+
+export default Stock;
+
+
+
+// const Stock = ()=>{
+//     return(
+//         <>
+// <VendorNavbar/>
+// <AdminLayout>
+// <h1>Shiva Stock</h1>
+// </AdminLayout>
+//         </>
+//     )
+// }
+
+// export default Stock;
+
+

@@ -1,0 +1,36 @@
+.scroll-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.categories-scroll {
+    display: flex;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    padding: 10px 0;
+    gap: 20px;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+}
+
+.scroll-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 24px;
+    background-color: #75756f;
+    color: #c8d0d3;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    z-index: 1;
+}
+
+.left-scroll {
+    left: -20px;
+}
+
+.right-scroll {
+    right: -20px;
+}

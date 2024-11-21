@@ -1,0 +1,8 @@
+/* card.css */
+
+.card-list {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap; /* Allows cards to wrap to the next line on smaller screens */
+    margin: 20px; /* Adds margin around the list */
+  }

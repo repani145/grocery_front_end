@@ -1,0 +1,8 @@
+.admin-panel .content {
+    flex-grow: 1;
+  }
+  
+  .admin-panel .sidebar {
+    min-width: 250px;
+  }
+  

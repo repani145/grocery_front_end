@@ -1,0 +1,40 @@
+.zoom-text-container {
+    position: relative;
+    height: 100vh; /* Full viewport height */
+    display: flex;
+    align-items: center; /* Center content vertically */
+    justify-content: center; /* Center content horizontally */
+    overflow: hidden; /* Prevent overflow */
+    background-image: url('./com33.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    background-color: yellowgreen;
+    border-radius: 10px;
+    margin: 10px;
+  }
+  
+  .text {
+    font-size: 0%; /* Base text size */
+    color: black; /* Text color */
+    font-weight: bold; /* Text weight */
+    transition: transform 0.2s ease-out; /* Smooth scaling transition */
+    z-index: 2; /* Ensure text is on top */
+    
+  }
+  
+   /* LiveText.css */
+.live-text {
+    font-size: 22px; /* Adjust size as needed */
+    font-weight: bold;
+    background-image: url('./comp3.png'); /* Replace with your texture path */
+    background-size: cover;
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    text-shadow: 0px 0px 3px white;
+    /* margin-left: -80px; */
+    /* background-color: yellowgreen; */
+  }
+
+  

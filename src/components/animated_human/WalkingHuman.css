@@ -1,0 +1,11 @@
+.walking-human {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
+
+.walking-human img {
+  width: 80px; /* Adjust based on preferred size */
+  height: auto;
+}

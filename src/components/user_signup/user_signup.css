@@ -1,0 +1,45 @@
+/* General container style to match navbar aesthetics */
+.signup-container {
+    background-color: #f8f9fa; /* Light background to contrast with Navbar */
+    border: 1px solid #f6a859; /* Border color similar to signup button border */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    color: #724e27; /* Text color to match Navbar brand */
+  }
+  
+  /* Form headings and labels */
+  .signup-container h3 {
+    color: #724e27; /* Navbar brand color */
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  .signup-container .form-label {
+    color: #8aa7d6; /* Match with Navbar links */
+    font-weight: bold;
+  }
+  
+  /* Form inputs styling */
+  .signup-container .form-control {
+    border-color: #f6a859; /* Match with button border */
+    border-radius: 5px;
+  }
+  
+  .signup-container .form-control:focus {
+    border-color: #724e27;
+    box-shadow: 0 0 5px rgba(114, 78, 39, 0.5); /* Subtle shadow on focus */
+  }
+  
+  /* Submit button styling */
+  .signup-container .btn-primary {
+    background-color: #f6a859;
+    border-color: #f6a859;
+    color: white;
+  }
+  
+  .signup-container .btn-primary:hover {
+    background-color: #ff6b57; /* Match Login button hover color */
+    border-color: #ff6b57;
+  }
+  
