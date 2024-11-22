@@ -25,7 +25,7 @@ const SignUp = () => {
       {selectedOption === 'UserSignup' && <UserSignup />}
       {selectedOption === 'VendorSignup' && <VendorSignup />}
       {/* {selectedOption === 'Login' && <Login />} */}
-      <br/>
+      <br/><br/><br/>
       <Footor />
     </>
   );
