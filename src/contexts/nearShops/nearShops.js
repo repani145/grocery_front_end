@@ -9,11 +9,11 @@ const CartDataContext = createContext()
 
 
 export const MycartDataProvider = ({ children }) => {
-    // const [cartItems, setCartItems] = useState([]);
-    // const [status, setStatus] = useState(null);
-    // const [removed, setRemoved] = useState(false);
-    // const [itemsCount, setItemsCount] = useState(0);
-    // const [totalCost, setTotalCost] = useState(0);
+    const [cartItems, setCartItems] = useState([]);
+    const [status, setStatus] = useState(null);
+    const [removed, setRemoved] = useState(false);
+    const [itemsCount, setItemsCount] = useState(0);
+    const [totalCost, setTotalCost] = useState(0);
     const { accessToken } = useAuth();
 
     useEffect(() => {
@@ -25,7 +25,7 @@ export const MycartDataProvider = ({ children }) => {
                     }
                 });
                 setCartItems(response.data.data);
-                calculateTotal(response.data.data);
+                setTotalCost(response.data.data);
                 setStatus(response.data.success);
             } catch (error) {
                 console.error("Error fetching cart items:", error);

@@ -21,9 +21,8 @@ const LandingPage = () => {
             <LandCom1/>
             <FadeZoomImage/>
             <LandComp2/>
-            <NearShops/>
-            <BootstrapComponent5/>
-            
+            <NearShops fromm={"land"}/>
+            <BootstrapComponent5/><br/><br/>
             <Footor/>
             {/* <LandComp2/> */}
             {/* <WelcomeBoard2/> */}

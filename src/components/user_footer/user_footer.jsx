@@ -1,9 +1,10 @@
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import logo from './logo.png'
 
-const UserFooter = () => {
+const UserFooter = ({frommL}) => {
+  const bg = frommL ? frommL : "#0d3a2d"
   return (
-    <footer className="text-center py-4" style={{ backgroundColor: '#0d3a2d', color: '#c8d0d3' }}>
+    <footer className="text-center py-4" style={{ backgroundColor: bg, color: '#c8d0d3' }}>
       <Container>
         <Row>
           {/* Logo Column */}

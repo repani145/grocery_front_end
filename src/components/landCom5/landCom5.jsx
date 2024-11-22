@@ -1,29 +1,33 @@
-import React from 'react';
-import './comp5.css'
+import React from "react";
+import "./comp5.css"; // Include the custom CSS
 
 const BootstrapComponent5 = () => {
   const items = [
-    { id: 1, logo: 'https://via.placeholder.com/50', title: 'Item 1', description: 'Description for item 1' },
-    { id: 2, logo: 'https://via.placeholder.com/50', title: 'Item 2', description: 'Description for item 2' },
-    { id: 3, logo: 'https://via.placeholder.com/50', title: 'Item 3', description: 'Description for item 3' },
+    { id: 1, logo: "👌", title: "Quality", description: "We ensure every product meets the highest standards of freshness and reliability." },
+    { id: 2, logo: "💵", title: "Affordability", description: "Enjoy top-quality products without straining your budget." },
+    { id: 3, logo: "💬", title: "Customer Support", description: "Always here to assist you with a smile." },
   ];
 
   return (
-    <div className="container text-center my-5">
-      <h2 className="subtitle">Subtitle</h2>
-      <h1 className="title mb-4">Main Title</h1>
-      <div className="row">
-        {items.map((item) => (
-          <div key={item.id} className="col-md-4 mb-4">
-            <div className="ccc0">
-              <img src={item.logo} alt={`Logo ${item.id}`} className="card-img-top" />
-              <div className="ccc">
-                <h5 className="ccc-title">{item.title}</h5>
-                <p className="ccc-text">{item.description}</p>
+    <div className="container-fluid bg-light py-5">
+      <div className="container text-center">
+        <h6 className="text-uppercase text-danger">A - KIND GROCERY ORDER</h6>
+        <h2 className="fw-bold mb-5">Order with us is easy</h2>
+        <div className="row g-4">
+          {items.map((item) => (
+            <div key={item.id} className="col-sm-12 col-md-6 col-lg-4">
+              <div className="h-100 shadow-sm p-3 bg-white rounded">
+                <div className="card-body text-center">
+                  <div className="circle-logo mx-auto mb-4">
+                    <span className="logo-icon">{item.logo}</span>
+                  </div>
+                  <h5 className="card-title fw-bold">{item.title}</h5>
+                  <p className="card-text">{item.description}</p>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </div>
   );

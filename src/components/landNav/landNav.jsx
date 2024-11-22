@@ -20,15 +20,16 @@ function LandNavbar() {
         <Navbar.Collapse id="navbarScroll">
           {/* Centered navigation links */}
           <Nav className="mx-auto my-2 my-lg-0" navbarScroll>
-            <Nav.Link href="#yourshop" style={{ color: "#8aa7d6" }}>
-              Your Shop
+            <Nav.Link >
+              <Link to={'/signup'} style={{ color: "#8aa7d6",textDecoration:"none" }}>Add Your Shop</Link>
             </Nav.Link>
             <Nav.Link href="#offers" style={{ color: "#8aa7d6" }}>
               Offers
             </Nav.Link>
-            <Nav.Link href="#contactus" style={{ color: "#8aa7d6" }}>
-              Contact Us
+            <Nav.Link href="#contactus" >
+            <Link to={'/contactUs'} style={{ color: "#8aa7d6",textDecoration:"none" }}>Contact Us</Link>
             </Nav.Link>
+            
           </Nav>
 
           {/* Right-aligned Login and Sign Up buttons */}

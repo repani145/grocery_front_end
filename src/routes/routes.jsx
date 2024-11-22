@@ -19,6 +19,7 @@ import AllCats from "../pages/all_categories_add/all_categories";
 import ShopItems from "../components/shoping_with_shop_names/shop_items";
 import ProfilePage from "../components/profile_component/profileComponent";
 import SearchedProductDisplay from "../components/ProductDisplay/searched_product_display";
+import ContactPage from "../components/contactUs/contactUs";
 
 
 const AllPages = ()=>{
@@ -61,6 +62,7 @@ const AllPages = ()=>{
                     <Route path="/" element={<LandingPage />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/signUp" element={<SignUp />} />
+                    <Route path="/contactUs" element={<ContactPage />} />
                     <Route path="*" element={<Navigate to="/" replace />} />
                 </>
                 }

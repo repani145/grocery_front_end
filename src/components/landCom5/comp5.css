@@ -1,9 +1,45 @@
-/* BootstrapComponent.css */
-.subtitle {
-    font-size: 20px;
-  }
-  
-  .title {
-    font-size: 24px;
-  }
-  
+/* Subtitle and title */
+.text-danger {
+  font-size: 1rem;
+}
+
+.fw-bold {
+  font-size: 2rem;
+  color: #333;
+}
+
+/* Circle Logo */
+.circle-logo {
+  width: 100px;
+  height: 100px;
+  background-color: #62a6ee;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.5rem;
+  font-weight: bold;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Card enhancements */
+.shadow-sm {
+  border-radius: 12px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.shadow-sm:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+}
+
+.card-title {
+  font-size: 1.2rem;
+  color: #333;
+}
+
+.card-text {
+  color: #666;
+  font-size: 0.95rem;
+}
