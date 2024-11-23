@@ -30,7 +30,7 @@ const MyOrders = () => {
 
   return (
     <Container fluid className="my-4 d-flex flex-column justify-content-center" style={{ minHeight: "100vh"}}>
-      <h2 className="text-center mb-4" style={{ color: "#e5ac08",marginTop:"-150px" }}>My Orders</h2>
+      <h2 className="text-center mb-4" style={{ color: "#e5ac08"}}>My Orders</h2>
 
       {/* Header Card */}
       <Card className="mb-3" style={{ backgroundColor: "#c8d0d3", color: "#0d3a2d" }}>

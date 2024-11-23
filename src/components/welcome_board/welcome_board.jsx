@@ -3,7 +3,7 @@ import "./welcome_board.css";
 
 const WelcomeBoard = () => {
   return (
-    <div className="welcome-board-container" style={{height:"60vh"}}>
+    <div className="welcome-board-container" style={{height:"350px"}}>
       <div className="screw"></div>
       <div className="chain"></div>
       <div className="welcome-board">

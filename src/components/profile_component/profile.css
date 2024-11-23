@@ -1,0 +1,100 @@
+/* General Card Styling */
+.profile-card {
+    border-radius: 15px;
+    border: none;
+    background-color: #ffffff;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    position: relative; /* Ensure the content doesn't overlap */
+}
+
+/* Button styling */
+.update-btn {
+    position: absolute;
+    bottom: 15px; /* Slightly lower the button to avoid overlapping */
+    right: 15px; /* Adjust to avoid overlapping */
+    font-size: 1rem;
+    padding: 10px 20px;
+    border-radius: 12px;
+    background-color: #007bff;
+    color: #ffffff;
+    border: none;
+    z-index: 10; /* Ensure the button stays on top */
+    transition: background-color 0.3s ease;
+}
+
+.update-btn:hover {
+    background-color: #0056b3; /* Darken on hover */
+}
+
+/* Profile Image Styling */
+.profile-img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border: 5px solid #007bff;
+    transition: transform 0.3s ease-in-out;
+}
+
+.profile-img:hover {
+    transform: scale(1.1); /* Enlarge the image slightly on hover */
+}
+
+/* Profile Name Styling */
+.profile-name {
+    font-size: 1.75rem;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Profile Role Styling */
+.profile-role {
+    font-size: 1.1rem;
+    color: #555;
+}
+
+/* Contact Information Cards */
+.info-card {
+    padding: 15px;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 15px;
+    transition: transform 0.3s ease;
+}
+
+.info-card:hover {
+    transform: translateY(-5px); /* Lift the card slightly on hover */
+}
+
+.text-primary {
+    color: #007bff !important;
+    font-weight: 600;
+}
+
+/* Media Query for Responsiveness */
+@media (max-width: 767px) {
+    .update-btn {
+        position: absolute;
+        /* bottom: auto; */
+        right: auto;
+        /* width: 100%; */
+        /* margin-top: 15px; */
+    }
+
+    .profile-img {
+        width: 120px;
+        height: 120px;
+    }
+
+    .profile-name {
+        font-size: 1.5rem;
+    }
+
+    .profile-role {
+        font-size: 1rem;
+    }
+
+    .info-card {
+        margin-bottom: 12px;
+    }
+}

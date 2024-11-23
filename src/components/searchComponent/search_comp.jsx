@@ -47,9 +47,11 @@ const NavSearch = () => {
     const handleItem = (item)=>{
         setQuery(item.name)
         setSingleItem(item)
-        setSimilarItems(suggestions)
+        setSimilarItems(suggestions.filter((i)=>i!=item))
         setSuggestions([])
-        navigate(`/product/${item.id}`)
+        navigate(`/product/${query}`)
+        localStorage.setItem('categry',query)
+        localStorage.setItem('pro_id',item['id'])
     }
 
     return (

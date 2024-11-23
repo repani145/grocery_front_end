@@ -24,6 +24,7 @@ const Cart = () => {
         const total_count = cartItems.reduce((sum, item) => sum + item.count, 0);
         setItemsCount(total_count)
         setTotal(total)
+        setTotalCost(total)
     },[cartItems])
 
     const handleRemoveItem1 = async (item_id) => {

@@ -8,6 +8,7 @@ import logo from './logo.png'
 import { useCartData } from '../../hooks/my_cart/my_cart';
 import { Link } from 'react-router-dom';
 import NavSearch from '../searchComponent/search_comp';
+import human from './human_icon.jpg'
 
 const UserNav = () => {
     const { logout } = useAuth()
@@ -54,10 +55,10 @@ const UserNav = () => {
                         </div>
                         <Dropdown align="end">
                             <Dropdown.Toggle as="a" className="nav-link p-0">
-                                <img src="/path/to/user-image.png" alt="User" style={{ height: '30px', borderRadius: '50%' }} />
+                                <img src={human} alt="User" style={{ height: '30px', borderRadius: '50%' }} />
                             </Dropdown.Toggle>
                             <Dropdown.Menu style={{ backgroundColor: '#1f1e1d', color: '#c8d0d3' }}>
-                                <Dropdown.Item href="#profile" style={{ color: '#c8d0d3' }}>Profile</Dropdown.Item>
+                                <Dropdown.Item style={{ color: '#c8d0d3' }}><Link to='/profile'>Profile</Link></Dropdown.Item>
                                 <Dropdown.Item  style={{ color: '#c8d0d3' }}><Link to='/my-orders'>MyOrders</Link></Dropdown.Item>
                                 <Dropdown.Item href="#logout" style={{ color: '#c8d0d3' }} onClick={logout}>Logout</Dropdown.Item>
                             </Dropdown.Menu>

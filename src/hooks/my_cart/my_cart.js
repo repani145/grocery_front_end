@@ -67,7 +67,7 @@ export const MycartDataProvider = ({ children }) => {
     }, [accessToken]); // `accessToken` dependency ensures it fetches only when token changes
 
     return (
-        <CartDataContext.Provider value={{ itemsCount, setItemsCount, removed, setRemoved, cartItems, setCartItems, status, setStatus, totalCost }}>
+        <CartDataContext.Provider value={{ itemsCount, setItemsCount, removed, setRemoved, cartItems, setCartItems, status, setStatus, totalCost,setTotalCost }}>
             {children}
         </CartDataContext.Provider>
     );

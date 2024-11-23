@@ -1,11 +1,9 @@
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
-import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import './landNav.css'
 import { Link } from 'react-router-dom';
-import Login from '../../pages/login_page/login_page';
 import logo from './logo4.png'
 
 function LandNavbar() {
@@ -23,9 +21,9 @@ function LandNavbar() {
             <Nav.Link >
               <Link to={'/signup'} style={{ color: "#8aa7d6",textDecoration:"none" }}>Add Your Shop</Link>
             </Nav.Link>
-            <Nav.Link href="#offers" style={{ color: "#8aa7d6" }}>
+            {/* <Nav.Link href="#offers" style={{ color: "#8aa7d6" }}>
               Offers
-            </Nav.Link>
+            </Nav.Link> */}
             <Nav.Link href="#contactus" >
             <Link to={'/contactUs'} style={{ color: "#8aa7d6",textDecoration:"none" }}>Contact Us</Link>
             </Nav.Link>

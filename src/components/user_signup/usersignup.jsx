@@ -127,6 +127,19 @@ const UserSignup = () => {
                   <Button className="mt-3" variant="success" onClick={handleOtpVerification}>
                     Submit OTP
                   </Button>
+                  <Button
+                    className="mt-3"
+                    variant="secondary"
+                    onClick={() => {
+                      setOtpSent(false);
+                      setOtp("");
+                      setFormData((prevData) => ({ ...prevData, email: "" }));
+                      setMessage("");
+                      setIsError(false);
+                    }}
+                  >
+                    Change Email
+                  </Button>
                 </>
               )}
             </Form>
