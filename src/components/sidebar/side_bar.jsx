@@ -5,45 +5,6 @@ import React, { useState } from 'react';
 import { FaBars, FaTachometerAlt, FaBoxes, FaDollarSign, FaShoppingCart } from 'react-icons/fa';
 
 
-// const Sidebar = () => {
-//     const [collapsed, setCollapsed] = useState(false);
-
-//     const toggleSidebar = () => {
-//         setCollapsed(!collapsed);
-//     };
-
-//     return (
-//         <div className={`sidebar ${collapsed ? 'collapsed' : ''}`}>
-//             <button className="toggle-btn" onClick={toggleSidebar}>
-//                 <FaBars />
-//             </button>
-//             {/* <h2 className="sidebar-title">{!collapsed && 'Admin Panel'}</h2> */}
-//             <ul className="sidebar-menu">
-//                 <li>
-//                     <Link to="/dashboard">
-//                         <FaTachometerAlt /> {!collapsed && 'Dashboard'}
-//                     </Link>
-//                 </li>
-//                 <li>
-//                     <Link to="/stock">
-//                         <FaBoxes /> {!collapsed && 'Stock'}
-//                     </Link>
-//                 </li>
-//                 <li>
-//                     <Link to="/income">
-//                         <FaDollarSign /> {!collapsed && 'Income'}
-//                     </Link>
-//                 </li>
-//                 <li>
-//                     <Link to="/orders">
-//                         <FaShoppingCart /> {!collapsed && 'Orders'}
-//                     </Link>
-//                 </li>
-//             </ul>
-//         </div>
-//     );
-// };
-
 
 const AdminLayout = ({ children }) => {
     const [collapsed, setCollapsed] = useState(false);

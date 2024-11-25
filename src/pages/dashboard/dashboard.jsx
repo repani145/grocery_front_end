@@ -1,3 +1,4 @@
+import ChildDashboard from "../../components/dashboard_component/child_dashboard";
 import AdminLayout from "../../components/sidebar/side_bar";
 import VendorNavbar from "../../components/vendor_nav/vendor_nav";
 
@@ -8,7 +9,7 @@ const Dashboard = ()=>{
         <>
         <VendorNavbar/>
         <AdminLayout>
-            <h1>Shiva Dashboard</h1>
+            <ChildDashboard/>
         </AdminLayout>
         </>
     )

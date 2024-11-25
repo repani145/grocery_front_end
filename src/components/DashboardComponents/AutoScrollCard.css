@@ -1,0 +1,20 @@
+/* Style the card */
+.dd1 {
+    width: 100%;
+    height: 250px; /* You can adjust the height of the card */
+    overflow: hidden; /* Hide the images overflowing the container */
+    position: relative;
+}
+
+/* Container to hold images in a row */
+.image-container {
+    display: flex;
+    transition: transform 0.5s ease-in-out; /* Smooth transition for image change */
+}
+
+/* Style each image */
+.image-card {
+    width: 300px; /* Width of each image */
+    height: 200px; /* Height of each image */
+    object-fit: cover; /* Ensure the images maintain aspect ratio */
+}
