@@ -15,7 +15,7 @@ const AdminLayout = ({ children }) => {
     return (
         <div style={{ display: 'flex' }}>
             {/* <Sidebar /> */}
-            <div className={`sidebar ${collapsed ? 'collapsed' : ''}`}>
+            <div className={`sidebar ${collapsed ? 'collapsed' : ''}`} style={{width:collapsed ? '6%' : '18%'}}>
                 <button className="toggle-btn" onClick={toggleSidebar}>
                     <FaBars />
                 </button>

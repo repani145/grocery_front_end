@@ -12,7 +12,7 @@ const VendorNavbar = ({ onToggleSidebar }) => {
         navigate('/')
     }
   return (
-    <Navbar bg="dark" variant="dark" expand="lg" className="px-3">
+    <Navbar bg="dark" variant="dark" expand="lg" className="px-3" style={{height:"10vh"}}>
       {/* Left Icon - Toggle Sidebar */}
       <Navbar.Brand href="#" onClick={onToggleSidebar}>
         <FaBars size={24} />

@@ -1,14 +1,14 @@
-import { Container } from "react-bootstrap";
+// import { Container } from "react-bootstrap";
 import LandNavbar from "../../components/landNav/landNav";
-import UserFooter from "../../components/user_footer/user_footer";
+// import UserFooter from "../../components/user_footer/user_footer";
 import WelcomeBoard from "../../components/welcome_board/welcome_board";
 import './landing_page.css'
-import WelcomeBoard2 from "../../components/welcome2/welcome_board";
+// import WelcomeBoard2 from "../../components/welcome2/welcome_board";
 import LandCom1 from "../../components/landCom1/comp1";
 import LandComp2 from "../../components/landCom2/comp2";
 import FadeZoomImage from "../../components/landCom3/comp3";
 import Footor from "../../components/LandFooter/landFooter";
-import CardComponent from "../../components/landCom4/landCom4";
+// import CardComponent from "../../components/landCom4/landCom4";
 import NearShops from "../../components/landCom4/landCom4";
 import BootstrapComponent5 from "../../components/landCom5/landCom5";
 
