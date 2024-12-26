@@ -105,8 +105,6 @@ const UserSignup = () => {
         setIsError(false);
       } else {
         setMessage(response.data.message);
-        setIsError(true);
-        setShowModal(pre => !pre)
       }
     } catch (error) {
       setMessage("An error occurred. Please try again.");

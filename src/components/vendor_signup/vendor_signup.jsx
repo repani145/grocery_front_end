@@ -122,7 +122,6 @@ const VendorSignup = () => {
         setErrorMessage("");
       } else {
         setErrorMessage("Registration failed. Try again.");
-        setShowModal(pre => !pre)
       }
     } catch (error) {
       console.error("Error during signup:", error);
