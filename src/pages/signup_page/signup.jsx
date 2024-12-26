@@ -7,25 +7,26 @@ import Footor from "../../components/LandFooter/landFooter";
 import './signup.css'
 
 const SignUp = () => {
-  const [selectedOption, setSelectedOption] = useState(null);
+  // const [selectedOption, setSelectedOption] = useState(null);
 
-  const handleOptionSelect = (option) => {
-    setSelectedOption(option);
-  };
+  // const handleOptionSelect = (option) => {
+  //   setSelectedOption(option);
+  // };
 
   return (
     <>
       <LandNavbar />
-      <br/>
-      {/* <br/><br/><br/> */}
-      {!selectedOption && (
+      <br />
+      <br /><br /><br />
+      <SignupOptions />
+      {/* {!selectedOption && (
         <SignupOptions onSelectOption={handleOptionSelect} />
-      )}
+      )} */}
 
-      {selectedOption === 'UserSignup' && <UserSignup />}
-      {selectedOption === 'VendorSignup' && <VendorSignup />}
+      {/* {selectedOption === 'UserSignup' && <UserSignup />}
+      {selectedOption === 'VendorSignup' && <VendorSignup />} */}
       {/* {selectedOption === 'Login' && <Login />} */}
-      <br/><br/><br/>
+      <br /><br /><br />
       <Footor />
     </>
   );

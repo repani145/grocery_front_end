@@ -5,8 +5,16 @@ import React, { useState } from "react";
 import "./contactPage.css";
 import { baseUrl } from "../../urls/urls";
 import { Alert } from "react-bootstrap";
+import PrizeBlastModal from "../blast-text/blast_text";
+
 
 const ContactPage = () => {
+
+  const [showModal, setShowModal] = useState(false);
+
+  // const handleOpenModal = () => setShowModal(true);
+  const handleCloseModal = () => setShowModal(false);
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -33,7 +41,8 @@ const ContactPage = () => {
 
       if (response.ok) {
         setStatus("Your message has been sent successfully!");
-        alert("Your message has been sent successfully!")
+        setShowModal(true)
+        // alert("We will reach you shortly !")
         setFormData({ name: "", email: "", message: "" });
       } else {
         setStatus("Failed to send your message. Please try again later.");
@@ -104,6 +113,10 @@ const ContactPage = () => {
           </div>
         </div>
       </div>
+      {
+        status && <PrizeBlastModal handleCloseModal={handleCloseModal} showModal={showModal} blast_text={"We'll get back to you soon "} />
+      }
+      {/* <PrizeBlastModal/> */}
       <Footor />
     </>
 

@@ -1,9 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Form, Button, Container, Row, Col } from "react-bootstrap";
 import axios from "axios";
 import { useAuth } from "../../hooks/useAuth/userAuth";
 import "./vendor_sign.css";
 import { baseUrl } from "../../urls/urls";
+import LandNavbar from "../landNav/landNav";
+import Footor from "../LandFooter/landFooter";
+import { Navigate } from "react-router-dom";
+import PrizeBlastModal from "../blast-text/blast_text";
 
 const VendorSignup = () => {
   const { accessToken } = useAuth();
@@ -21,6 +25,20 @@ const VendorSignup = () => {
     address: "",
     landmark: "",
   });
+
+  //for successful signup popUp
+  const [showModal, setShowModal] = useState(false);
+  const handleCloseModal = () => setShowModal(false);
+
+  useEffect(() => {
+    if (showModal) {
+      const timeoutId = setTimeout(() => {
+        Navigate('/signup');
+      }, 2000);
+
+      return () => clearTimeout(timeoutId);
+    }
+  }, [showModal]);
 
   const handleChange = (e) => {
     const { id, value } = e.target;
@@ -97,9 +115,14 @@ const VendorSignup = () => {
       });
       if (response.data.success) {
         setSuccessMessage("Registered successfully");
+        setShowModal(true)
+        setTimeout(() => {
+          Navigate('/signup')
+        }, 2000)
         setErrorMessage("");
       } else {
         setErrorMessage("Registration failed. Try again.");
+        setShowModal(pre => !pre)
       }
     } catch (error) {
       console.error("Error during signup:", error);
@@ -109,7 +132,7 @@ const VendorSignup = () => {
 
   return (
     <>
-
+      <LandNavbar />
       <Container className="signup-form-container d-flex align-items-center justify-content-center mt-5">
         <Row className="w-100">
           <Col md={8} lg={6} className="mx-auto">
@@ -131,7 +154,7 @@ const VendorSignup = () => {
                   </Form.Group>
                   <Button variant="primary" onClick={handleSendOtp} className="w-100">
                     Send OTP
-                  </Button> <br/><br/>
+                  </Button> <br /><br />
                 </>
               )}
 
@@ -168,7 +191,7 @@ const VendorSignup = () => {
                   >
                     Change Email
                   </Button>
-                  <br/><br/>
+                  <br /><br />
                 </>
               )}
 
@@ -255,6 +278,11 @@ const VendorSignup = () => {
           </Col>
         </Row>
       </Container>
+      <br /><br />
+      {
+        showModal && <PrizeBlastModal handleCloseModal={handleCloseModal} showModal={showModal} blast_text={"successfully added your SHOP !"} />
+      }
+      <Footor />
     </>
   );
 };

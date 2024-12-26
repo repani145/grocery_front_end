@@ -11,23 +11,23 @@ function LandNavbar() {
     <Navbar expand="lg" className='navback' >
       <Container fluid>
         {/* Logo on the left corner */}
-        <Navbar.Brand  className="ms-2" style={{ color: "#724e27", fontWeight: "bold" }}>
-          <Link to={'/'}><img src={logo} style={{width:"60px",height:"60px"}}/></Link>
+        <Navbar.Brand className="ms-2" style={{ color: "#724e27", fontWeight: "bold" }}>
+          <Link to={'/'}><img src={logo} style={{ width: "60px", height: "60px" }} /></Link>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
           {/* Centered navigation links */}
           <Nav className="mx-auto my-2 my-lg-0" navbarScroll>
             <Nav.Link >
-              <Link to={'/signup'} style={{ color: "#8aa7d6",textDecoration:"none" }}>Add Your Shop</Link>
+              <Link to={'/signup/vendor_signup'} style={{ color: "#8aa7d6", textDecoration: "none" }}>Add Your Shop</Link>
             </Nav.Link>
             {/* <Nav.Link href="#offers" style={{ color: "#8aa7d6" }}>
               Offers
             </Nav.Link> */}
             <Nav.Link href="#contactus" >
-            <Link to={'/contactUs'} style={{ color: "#8aa7d6",textDecoration:"none" }}>Contact Us</Link>
+              <Link to={'/contactUs'} style={{ color: "#8aa7d6", textDecoration: "none" }}>Contact Us</Link>
             </Nav.Link>
-            
+
           </Nav>
 
           {/* Right-aligned Login and Sign Up buttons */}

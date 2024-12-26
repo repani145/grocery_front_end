@@ -1,8 +1,8 @@
-import { BrowserRouter, Route ,Routes, useNavigate , Navigate} from "react-router-dom";
+import { BrowserRouter, Route, Routes, useNavigate, Navigate } from "react-router-dom";
 import LandingPage from "../pages/landing_page/landing_page";
 import Login from "../pages/login_page/login_page";
 import SignUp from "../pages/signup_page/signup";
-import {useAuth} from "../hooks/useAuth/userAuth";
+import { useAuth } from "../hooks/useAuth/userAuth";
 import Home from "../pages/user_home_page/home_page";
 import VendorHome from "../pages/admin_home_page/home_page";
 import Dashboard from "../pages/dashboard/dashboard";
@@ -20,53 +20,59 @@ import ShopItems from "../components/shoping_with_shop_names/shop_items";
 import ProfilePage from "../components/profile_component/profileComponent";
 import SearchedProductDisplay from "../components/ProductDisplay/searched_product_display";
 import ContactPage from "../components/contactUs/contactUs";
+import UserSignup from "../components/user_signup/usersignup";
+import VendorSignup from "../components/vendor_signup/vendor_signup";
 
 
-const AllPages = ()=>{
-    const {user, accessToken} = useAuth(); // Get user and token from custom useAuth hook
+const AllPages = () => {
+    const { user, accessToken } = useAuth(); // Get user and token from custom useAuth hook
 
     // console.log(user['role'])
-    return(
+    return (
         <>
             <Routes>
-                {accessToken ? 
-                <>
-                    {
-                    user['role']=='user' ? 
+                {accessToken ?
                     <>
-                        <Route path="/home" element={<AddNavFooter><Home/></AddNavFooter>}/>
-                        <Route path="/home/category/:category" element={<AddNavFooter><Category/></AddNavFooter>}/>
-                        <Route path="/cart" element={<AddNavFooter><Cart/></AddNavFooter>}/>
-                        <Route path="cart/payment" element={<CheckoutForm/>}/>
-                        <Route path="my-orders" element={<AddNavFooter><MyOrders/></AddNavFooter>}/>
-                        <Route path="/success" element={<PaymentSuccess/>}/>
-                        <Route path="/home/shop/:shop_id" element={<AddNavFooter><ShopItems/></AddNavFooter>} />
-                        <Route path="/profile" element={<AddNavFooter><ProfilePage/></AddNavFooter>}/>
-                        <Route path="/product/:item_id" element={<AddNavFooter><SearchedProductDisplay/></AddNavFooter>} />
-                        {/* <Route path="/payment" element={<Payment/>}/> */}
+                        {
+                            user['role'] == 'user' ?
+                                <>
+                                    <Route path="/home" element={<AddNavFooter><Home /></AddNavFooter>} />
+                                    <Route path="/home/category/:category" element={<AddNavFooter><Category /></AddNavFooter>} />
+                                    <Route path="/cart" element={<AddNavFooter><Cart /></AddNavFooter>} />
+                                    <Route path="cart/payment" element={<CheckoutForm />} />
+                                    <Route path="my-orders" element={<AddNavFooter><MyOrders /></AddNavFooter>} />
+                                    <Route path="/success" element={<PaymentSuccess />} />
+                                    <Route path="/home/shop/:shop_id" element={<AddNavFooter><ShopItems /></AddNavFooter>} />
+                                    <Route path="/profile" element={<AddNavFooter><ProfilePage /></AddNavFooter>} />
+                                    <Route path="/product/:item_id" element={<AddNavFooter><SearchedProductDisplay /></AddNavFooter>} />
+
+                                    {/* <Route path="/" element={<AddNavFooter></AddNavFooter>} /> */}
+                                    {/* <Route path="/payment" element={<Payment/>}/> */}
+                                </>
+                                :
+                                <>
+                                    <Route path="/home" element={<VendorHome />} />
+                                    <Route path="/dashboard" element={<Dashboard />} />
+                                    <Route path="/stock" element={<Stock />} />
+                                    <Route path="/income" element={<Income />} />
+                                    <Route path="/orders" element={<Orders />} />
+                                    <Route path="/all-categories" element={<AllCats />} />
+                                </>
+                        }
+                        <Route path="*" element={<Navigate to="/home" replace />} />
                     </>
                     :
                     <>
-                        <Route path="/home" element={<VendorHome/>}/>
-                        <Route path="/dashboard" element={<Dashboard/>}/>
-                        <Route path="/stock" element={<Stock/>}/>
-                        <Route path="/income" element={<Income/>}/>
-                        <Route path="/orders" element={<Orders/>} /> 
-                        <Route path="/all-categories" element={<AllCats/>}/>
+                        <Route path="/" element={<LandingPage />} />
+                        <Route path="/login" element={<Login />} />
+                        <Route path="/signup" element={<SignUp />} />
+                        <Route path="/signup/user_signup" element={<UserSignup />} />
+                        <Route path="/signup/vendor_signup" element={<VendorSignup />} />
+                        <Route path="/contactUs" element={<ContactPage />} />
+                        <Route path="*" element={<Navigate to="/" replace />} />
                     </>
                 }
-                    <Route path="*" element={<Navigate to="/home" replace />} />
-                </> 
-                : 
-                <>
-                    <Route path="/" element={<LandingPage />} />
-                    <Route path="/login" element={<Login />} />
-                    <Route path="/signUp" element={<SignUp />} />
-                    <Route path="/contactUs" element={<ContactPage />} />
-                    <Route path="*" element={<Navigate to="/" replace />} />
-                </>
-                }
-                
+
             </Routes>
         </>
     )
