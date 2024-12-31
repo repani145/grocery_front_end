@@ -58,9 +58,9 @@ const UserNav = () => {
                                 <img src={human} alt="User" style={{ height: '30px', borderRadius: '50%' }} />
                             </Dropdown.Toggle>
                             <Dropdown.Menu style={{ backgroundColor: '#1f1e1d', color: '#c8d0d3' }}>
-                                <Dropdown.Item style={{ color: '#c8d0d3' }}><Link to='/profile'>Profile</Link></Dropdown.Item>
-                                <Dropdown.Item  style={{ color: '#c8d0d3' }}><Link to='/my-orders'>MyOrders</Link></Dropdown.Item>
-                                <Dropdown.Item href="#logout" style={{ color: '#c8d0d3' }} onClick={logout}>Logout</Dropdown.Item>
+                                <Dropdown.Item style={{ color: '#c8d0d3' }}><Link to='/profile' style={{textDecoration:"none",color:"orange"}}>Profile</Link></Dropdown.Item>
+                                <Dropdown.Item  style={{ color: '#c8d0d3' }}><Link to='/my-orders' style={{textDecoration:"none",color:"orange"}}>MyOrders</Link></Dropdown.Item>
+                                <Dropdown.Item href="#logout" style={{ color: 'orange' }} onClick={logout}>Logout</Dropdown.Item>
                             </Dropdown.Menu>
                         </Dropdown>
                     </Nav>

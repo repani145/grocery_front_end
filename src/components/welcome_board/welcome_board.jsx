@@ -7,8 +7,8 @@ const WelcomeBoard = () => {
       <div className="screw"></div>
       <div className="chain"></div>
       <div className="welcome-board">
-        <h2>Welcome to Our Store!</h2>
-        <p>Your one-stop shop for amazing deals and offers.</p>
+        <h2>Welcome to Gully Grocery!</h2>
+        <p>Your one-stop shop for amazing deals</p>
       </div>
     </div>
   );
