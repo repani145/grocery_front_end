@@ -39,7 +39,7 @@ const ShopItems = () => {
     };
 
     return (
-        <div style={{height:"80vh"}}>
+        <div style={{}}>
             <div className="items-button-container" style={{position:"sticky",top:"1px"}}>
                 {allCatgries.map((single_cat) => (
                     <button className="items-button"
