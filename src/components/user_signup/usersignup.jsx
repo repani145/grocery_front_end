@@ -255,6 +255,7 @@ const UserSignup = () => {
                     onChange={handleChange}
                   />
                 </Form.Group>
+                
                 <Button className="mt-3" variant="primary" type="submit">
                   Sign Up
                 </Button>

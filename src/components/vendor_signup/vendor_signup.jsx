@@ -1,30 +1,30 @@
 import React, { useEffect, useState } from "react";
-import { Form, Button, Container, Row, Col } from "react-bootstrap";
 import axios from "axios";
-import { useAuth } from "../../hooks/useAuth/userAuth";
+import { Form, Button, Alert, Container, Col, Row } from "react-bootstrap";
 import "./vendor_sign.css";
-import { baseUrl } from "../../urls/urls";
 import LandNavbar from "../landNav/landNav";
 import Footor from "../LandFooter/landFooter";
-import { Navigate } from "react-router-dom";
+import { baseUrl } from "../../urls/urls";
 import PrizeBlastModal from "../blast-text/blast_text";
+import { Navigate } from "react-router-dom";
 
 const VendorSignup = () => {
-  const { accessToken } = useAuth();
-  const [stage, setStage] = useState("email"); // Stages: email, otp, verified
-  const [errorMessage, setErrorMessage] = useState("");
-  const [successMessage, setSuccessMessage] = useState("");
   const [formData, setFormData] = useState({
     email: "",
-    otp: "",
-    shopName: "",
-    phoneNumber: "",
+    shop_name: "",
+    phone_number: "",
     username: "",
-    shopImage: null,
+    image: null,
     password: "",
     address: "",
     landmark: "",
   });
+
+  const [message, setMessage] = useState("");
+  const [isError, setIsError] = useState(false);
+  const [isEmailVerified, setIsEmailVerified] = useState(false);
+  const [otpSent, setOtpSent] = useState(false);
+  const [otp, setOtp] = useState("");
 
   //for successful signup popUp
   const [showModal, setShowModal] = useState(false);
@@ -40,12 +40,55 @@ const VendorSignup = () => {
     }
   }, [showModal]);
 
+
   const handleChange = (e) => {
-    const { id, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [id]: value,
-    }));
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+
+  const handleEmailVerification = async () => {
+    try {
+      const response = await axios.post(`${baseUrl}/send-otp`, {
+        email: formData.email,
+      });
+
+      if (response.data.success) {
+        setMessage("OTP sent to your email.");
+        setIsError(false);
+        setOtpSent(true);
+      } else {
+        setMessage(response.data.message);
+        setIsError(true);
+      }
+    } catch (error) {
+      setMessage("Failed to send OTP. Please try again.");
+      setIsError(true);
+    }
+  };
+
+  const handleOtpVerification = async () => {
+    try {
+      const response = await axios.post(`${baseUrl}/verify-otp`, {
+        email: formData.email,
+        otp,
+      });
+
+      if (response.data.success) {
+        setMessage("Email verified successfully!");
+        setIsError(false);
+        setIsEmailVerified(true);
+        setOtpSent(false);
+      } else {
+        setMessage(response.data.message);
+        setIsError(true);
+      }
+    } catch (error) {
+      setMessage("Failed to verify OTP. Please try again.");
+      setIsError(true);
+    }
   };
 
   const handleFileChange = (e) => {
@@ -55,231 +98,192 @@ const VendorSignup = () => {
     }));
   };
 
-  // Send OTP to email
-  const handleSendOtp = async () => {
-    try {
-      const response = await axios.post(`${baseUrl}/send-otp`, { email: formData.email });
-      if (response.data.success) {
-        setStage("otp");
-        setSuccessMessage("OTP sent to your email. Please check your inbox.");
-        setErrorMessage("");
-      } else {
-        setErrorMessage(response.data.message);
-      }
-    } catch (error) {
-      console.error("Error sending OTP:", error);
-      setErrorMessage("Error sending OTP.");
-    }
-  };
-
-  // Verify OTP
-  const handleVerifyOtp = async () => {
-    try {
-      const response = await axios.post(`${baseUrl}/verify-otp`, {
-        email: formData.email,
-        otp: formData.otp,
-      });
-      if (response.data.success) {
-        setStage("verified");
-        setSuccessMessage("Email verified successfully.");
-        setErrorMessage("");
-      } else {
-        setErrorMessage("Invalid OTP. Try again.");
-      }
-    } catch (error) {
-      console.error("Error verifying OTP:", error);
-      setErrorMessage("Error verifying OTP.");
-    }
-  };
-
-  // Handle Form Submit
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     const data = new FormData();
-    data.append("shop_name", formData.shopName);
+    data.append("shop_name", formData.shop_name);
     data.append("email", formData.email);
-    data.append("phone_number", formData.phoneNumber);
+    data.append("phone_number", formData.phone_number);
     data.append("username", formData.username);
     data.append("password", formData.password);
     data.append("address", formData.address);
     data.append("landmark", formData.landmark);
-    data.append("image", formData.shopImage);
-
+    data.append("image", formData.image); // Append image file
+  
     try {
       const response = await axios.post(`${baseUrl}/vendor_signup`, data, {
         headers: {
           "Content-Type": "multipart/form-data",
-          Authorization: `Bearer ${accessToken}`,
         },
       });
+  
       if (response.data.success) {
-        setSuccessMessage("Registered successfully");
-        setShowModal(true)
-        setTimeout(() => {
-          Navigate('/signup')
-        }, 2000)
-        setErrorMessage("");
+        setMessage("Signup successful!");
+        setShowModal(true);
       } else {
-        setErrorMessage("Registration failed. Try again.");
+        setMessage(response.data.message);
+        setIsError(true);
       }
     } catch (error) {
-      console.error("Error during signup:", error);
-      setErrorMessage("Error during signup.");
+      setMessage("An error occurred. Please try again.");
+      setIsError(true);
     }
   };
+  
 
   return (
     <>
       <LandNavbar />
-      <Container className="signup-form-container d-flex align-items-center justify-content-center mt-5">
-        <Row className="w-100">
-          <Col md={8} lg={6} className="mx-auto">
-            <h2 className="text-center mb-4">Vendor Signup</h2>
-            <Form>
-              {stage === "email" && (
-                <>
-                  {errorMessage && (
-                    <div className="alert alert-danger text-center mb-3">{errorMessage}</div>
-                  )}
-                  <Form.Group controlId="email" className="mb-3">
-                    <Form.Label>Email</Form.Label>
-                    <Form.Control
-                      type="email"
-                      placeholder="Enter email"
-                      value={formData.email}
-                      onChange={handleChange}
-                    />
-                  </Form.Group>
-                  <Button variant="primary" onClick={handleSendOtp} className="w-100">
-                    Send OTP
-                  </Button> <br /><br />
-                </>
-              )}
+      <Container className="signup-container mt-5" >
+        <Row className="justify-content-center">
+          <Col xs={12} sm={10} md={8} lg={6} xl={5}>
+            {message && <Alert variant={isError ? "danger" : "success"}>{message}</Alert>}
+            <h3>Vendor Signup</h3>
 
-              {stage === "otp" && (
-                <>
-                  {errorMessage && (
-                    <div className="alert alert-danger text-center mb-3">{errorMessage}</div>
-                  )}
-                  <Form.Group controlId="email" className="mb-3">
-                    <Form.Label>Email</Form.Label>
-                    <Form.Control type="email" value={formData.email} disabled />
-                  </Form.Group>
-                  <Form.Group controlId="otp" className="mb-3">
-                    <Form.Label>OTP</Form.Label>
-                    <Form.Control
-                      type="text"
-                      placeholder="Enter OTP"
-                      value={formData.otp}
-                      onChange={handleChange}
-                    />
-                  </Form.Group>
-                  <Button variant="primary" onClick={handleVerifyOtp} className="w-100 mb-2">
-                    Verify OTP
+            {!isEmailVerified ? (
+              <Form>
+                <Form.Group controlId="email">
+                  <Form.Label>Email</Form.Label>
+                  <Form.Control
+                    type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    required
+                    disabled={otpSent}
+                  />
+                </Form.Group>
+                {!otpSent ? (
+                  <Button className="mt-3" variant="primary" onClick={handleEmailVerification}>
+                    Verify Email
                   </Button>
-                  <Button
-                    variant="secondary"
-                    onClick={() => {
-                      setStage("email");
-                      setFormData((prevData) => ({ ...prevData, otp: "" }));
-                      setErrorMessage("");
-                      setSuccessMessage("");
-                    }}
-                    className="w-100"
-                  >
-                    Change Email
-                  </Button>
-                  <br /><br />
-                </>
-              )}
+                ) : (
+                  <>
+                    <Form.Group controlId="otp" className="mt-3">
+                      <Form.Label>Enter OTP</Form.Label>
+                      <Form.Control
+                        type="text"
+                        value={otp}
+                        onChange={(e) => setOtp(e.target.value)}
+                        required
+                      />
+                    </Form.Group>
+                    <Button className="mt-3" variant="success" onClick={handleOtpVerification}>
+                      Submit OTP
+                    </Button>
+                    <Button
+                      className="mt-3"
+                      variant="secondary"
+                      onClick={() => {
+                        setOtpSent(false);
+                        setOtp("");
+                        setFormData((prevData) => ({ ...prevData, email: "" }));
+                        setMessage("");
+                        setIsError(false);
+                      }}
+                    >
+                      Change Email
+                    </Button>
+                  </>
+                )}
+              </Form>
+            ) : (
+              <Form onSubmit={handleSubmit}>
+                <Form.Group controlId="email" className="mb-3">
+                  <Form.Label>Email</Form.Label>
+                  <Form.Control type="email" value={formData.email} disabled />
+                </Form.Group>
+
+                <Form.Group controlId="shop_name">
+                  <Form.Label>Shop Name</Form.Label>
+                  <Form.Control
+                    type="text"
+                    name="shop_name"
+                    value={formData.shop_name}
+                    onChange={handleChange}
+                    required
+                  />
+                </Form.Group>
+
+                <Form.Group controlId="image">
+                  <Form.Label>Shop Image</Form.Label>
+                  <Form.Control
+                    type="file"
+                    name="image"
+                    accept="image/*"
+                    onChange={(e) => setFormData((prevData) => ({
+                      ...prevData,
+                      image: e.target.files[0]
+                    }))}
+                  />
+                </Form.Group>
 
 
-              {stage === "verified" && (
-                <Form onSubmit={handleSubmit}>
-                  <Form.Group controlId="email" className="mb-3">
-                    <Form.Label>Email</Form.Label>
-                    <Form.Control type="email" value={formData.email} disabled />
-                  </Form.Group>
+                <Form.Group controlId="phone_number">
+                  <Form.Label>Phone Number</Form.Label>
+                  <Form.Control
+                    type="text"
+                    name="phone_number"
+                    value={formData.phone_number}
+                    onChange={handleChange}
+                    required
+                  />
+                </Form.Group>
 
-                  <Form.Group controlId="shopName" className="mb-3">
-                    <Form.Label>Shop Name</Form.Label>
-                    <Form.Control
-                      type="text"
-                      placeholder="Enter shop name"
-                      value={formData.shopName}
-                      onChange={handleChange}
-                    />
-                  </Form.Group>
+                <Form.Group controlId="username">
+                  <Form.Label>Username</Form.Label>
+                  <Form.Control
+                    type="text"
+                    name="username"
+                    value={formData.username}
+                    onChange={handleChange}
+                    required
+                  />
+                </Form.Group>
 
-                  <Form.Group controlId="phoneNumber" className="mb-3">
-                    <Form.Label>Phone Number</Form.Label>
-                    <Form.Control
-                      type="tel"
-                      placeholder="Enter phone number"
-                      value={formData.phoneNumber}
-                      onChange={handleChange}
-                    />
-                  </Form.Group>
+                <Form.Group controlId="password">
+                  <Form.Label>Password</Form.Label>
+                  <Form.Control
+                    type="password"
+                    name="password"
+                    value={formData.password}
+                    onChange={handleChange}
+                    required
+                  />
+                </Form.Group>
 
-                  <Form.Group controlId="username" className="mb-3">
-                    <Form.Label>Username</Form.Label>
-                    <Form.Control
-                      type="text"
-                      placeholder="Enter username"
-                      value={formData.username}
-                      onChange={handleChange}
-                    />
-                  </Form.Group>
+                <Form.Group controlId="address">
+                  <Form.Label>Address</Form.Label>
+                  <Form.Control
+                    type="text"
+                    name="address"
+                    value={formData.address}
+                    onChange={handleChange}
+                  />
+                </Form.Group>
 
-                  <Form.Group controlId="shopImage" className="mb-3">
-                    <Form.Label>Shop Image</Form.Label>
-                    <Form.Control type="file" accept="image/*" onChange={handleFileChange} />
-                  </Form.Group>
+                <Form.Group controlId="landmark">
+                  <Form.Label>Landmark</Form.Label>
+                  <Form.Control
+                    type="text"
+                    name="landmark"
+                    value={formData.landmark}
+                    onChange={handleChange}
+                  />
+                </Form.Group>
 
-                  <Form.Group controlId="password" className="mb-3">
-                    <Form.Label>Password</Form.Label>
-                    <Form.Control
-                      type="password"
-                      placeholder="Enter password"
-                      value={formData.password}
-                      onChange={handleChange}
-                    />
-                  </Form.Group>
-
-                  <Form.Group controlId="address" className="mb-3">
-                    <Form.Label>Address</Form.Label>
-                    <Form.Control
-                      type="text"
-                      placeholder="Enter address"
-                      value={formData.address}
-                      onChange={handleChange}
-                    />
-                  </Form.Group>
-
-                  <Form.Group controlId="landmark" className="mb-3">
-                    <Form.Label>Landmark</Form.Label>
-                    <Form.Control
-                      type="text"
-                      placeholder="Enter landmark"
-                      value={formData.landmark}
-                      onChange={handleChange}
-                    />
-                  </Form.Group>
-                  {errorMessage && <div className="alert alert-danger">{errorMessage}</div>}
-                  {successMessage && <div className="alert alert-success">{successMessage}</div>}
-                  <Button variant="primary" type="submit" className="w-100">
-                    Signup
-                  </Button>
-                </Form>
-              )}
-            </Form>
+                <Button variant="primary" type="submit" className="w-100">
+                  Signup
+                </Button>
+              </Form>
+            )}
           </Col>
         </Row>
       </Container>
-      <br /><br />
+      <br /><br /><br />
       {
-        showModal && <PrizeBlastModal handleCloseModal={handleCloseModal} showModal={showModal} blast_text={"successfully added your SHOP !"} />
+        showModal && <PrizeBlastModal handleCloseModal={handleCloseModal} showModal={showModal} blast_text={"SignUp is successfully !"} />
       }
       <Footor />
     </>
