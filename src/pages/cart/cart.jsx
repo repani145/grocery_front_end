@@ -135,7 +135,7 @@ const Cart = () => {
     }
     return (
         <>
-            <center><h2 style={{ marginTop: "3%", marginBottom: "-3%" }}>My Cart</h2></center>
+            <center><h2 style={{ marginTop: "3%", marginBottom: "-3%" }}>My Cart</h2></center><br/>
             <div className="my-cart" style={{
                 minHeight: "100vh",
                 display: "flex",
