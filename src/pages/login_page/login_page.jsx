@@ -61,7 +61,7 @@ function Login() {
                   <Form.Label>Username</Form.Label>
                   <Form.Control
                     type="text"
-                    placeholder="Enter username : User@123"
+                    placeholder="Enter username : User@123 or MyShop@1(forShop)" 
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
                     required
@@ -72,7 +72,7 @@ function Login() {
                   <Form.Label>Password</Form.Label>
                   <Form.Control
                     type="password"
-                    placeholder="Enter password : User@123"
+                    placeholder="Enter password : User@123 or MyShop@1(forShop)"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     required
